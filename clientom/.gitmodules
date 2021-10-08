@@ -1,0 +1,3 @@
+[submodule "src/modules/ui"]
+	path = src/modules/ui
+	url = git@github.com:talkiiing/ui
