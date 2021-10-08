@@ -7,6 +7,9 @@
   html {
     font-family: 'Open Sans', 'Noto Sans', sans-serif;
   }
+  body {
+    @apply bg-omblack;
+  }
   a {
     @apply text-blue-500 hover:text-blue-600 transition-colors duration-150;
   }
