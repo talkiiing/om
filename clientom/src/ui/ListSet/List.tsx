@@ -9,7 +9,7 @@ const ListElem = (props: ListElemOptionProps) => {
   const { Icon, title } = props
   return (
     <div className='flex w-full items-center justify-between bg-omgray2 shadow-md rounded-md my-2 px-2 hover:bg-omblack'>
-      <h3 className='text-omwhite'>{title}</h3>
+      <h3 className='text-omwhite cursor-pointer'>{title}</h3>
 
       <div className='w-12 h-12 flex items-center justify-center'>
         <Icon className='w-6 h-6 text-omwhite' />

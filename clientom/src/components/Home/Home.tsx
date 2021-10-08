@@ -72,7 +72,7 @@ const Home = () => {
       </div>
       <div className='hidden grid grid-flow-row justify-items-center pt-10 gap-y-4'>
         <Logo className='mb-2 w-32 select-none' />
-        <p className='my-2 text-center'>Template React App от /talkiiing</p>
+        <p className='my-2 text-center select-none'>progressive DataExchange - Om</p>
         <Button
           icon={() => <QrcodeIcon className='w-6 h-6' />}
           value={'Запросы'}

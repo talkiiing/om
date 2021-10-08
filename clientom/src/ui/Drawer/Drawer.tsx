@@ -15,7 +15,7 @@ const DrawerOption = (props: DrawerOptionProps) => {
       <div className='w-12 h-12 flex items-center justify-center'>
         <Icon className='w-6 h-6' />
       </div>
-      {props.expanded ? <div>{title}</div> : null}
+      {props.expanded ? <div className='cursor-pointer'>{title}</div> : null}
     </div>
   )
 }
