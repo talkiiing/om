@@ -1,0 +1,46 @@
+name: server-ci
+on:
+  push:
+    paths:
+      - serverom/**
+      - .github/**
+  pull_request:
+    paths:
+      - serverom/**
+      - .github/**
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ./deploy.key
+          sudo chmod 600 ./deploy.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+
+      - name: Install PM2
+        run: npm i -g pm2
+
+      - name: Deploy
+        run: env $(cat .env | grep -v \"#\" | xargs) pm2 deploy serverom/ecosystem.config.js production
+
+      - name: Notify Telegram
+        uses: yanzay/notify-telegram@v0.1.0
+        if: always()
+        with:
+          chat: ${{ secrets.TG_CHAT_ID }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          status: ${{ job.status }}
