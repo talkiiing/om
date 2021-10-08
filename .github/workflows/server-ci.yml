@@ -31,6 +31,14 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
+      - name: Create env file
+        run: |
+          cd serverom
+          touch .env
+          echo "$ENV_FILE" > .env
+        env:
+          ENV_FILE: ${{secrets.ENV_FILE}}
+
       - name: Install PM2
         run: npm i -g pm2
 
