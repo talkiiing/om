@@ -16,13 +16,6 @@ module.exports = {
       zIndex: {
         full: '1000',
       },
-    },
-  },
-  variants: {
-    extend: {
-      backgroundColor: ['active', 'disabled'],
-      scale: ['focus-within', 'group-focus'],
-      textColor: ['active', 'disabled'],
       colors: {
         text: {
           highlight: '#FCFCFF',
@@ -38,6 +31,13 @@ module.exports = {
           DEFAULT: '#80FA55',
         },
       },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ['active', 'disabled'],
+      scale: ['focus-within', 'group-focus'],
+      textColor: ['active', 'disabled'],
     },
   },
   plugins: [],
