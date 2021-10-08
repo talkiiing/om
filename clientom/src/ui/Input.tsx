@@ -31,15 +31,16 @@ function Input<T = string>(props: IInputProps<T>) {
 
   return (
     <div
-      className={`${props.className} w-full ring-1 ring-gray-100 
+      className={`${props.className} w-full ring-1 dark:ring-gray-900 ring-gray-100 
       relative rounded-md flex flex-col`}
     >
       <input
         id={props.id || ''}
         type={props.type ? props.type : 'text'}
         onAnimationStart={handleAutoFill}
-        className={`w-full px-4 text rounded-md bg-gray-50 
-           hover:bg-gray-100 focus:bg-gray-100
+        className={`w-full px-4 text rounded-md 
+        dark:bg-gray-700 dark:text-gray-50 dark:hover:bg-gray-900 dark:focus:bg-gray-900
+        bg-gray-50 hover:bg-gray-100 focus:bg-gray-100
            outline-none focus:outline-none 
            transition-all duration-100 ${props.label ? 'pt-5 pb-1.5' : 'py-3'}`}
         // @ts-ignore

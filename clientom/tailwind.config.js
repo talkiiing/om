@@ -35,7 +35,7 @@ module.exports = {
           DEFAULT: '#80FA55',
         },
         gray: {
-          900: '#222232',
+          900: '#222234',
         },
         omheader: '#1F2937',
         omblue: {

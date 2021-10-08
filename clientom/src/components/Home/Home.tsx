@@ -63,8 +63,6 @@ const Home = () => {
     ],
   })
 
-  const [modal, setModal] = useState(false)
-
   // @ts-ignore
   return (
     <>
@@ -75,10 +73,6 @@ const Home = () => {
           icon={() => <QrcodeIcon className='w-6 h-6' />}
           value={'Запросы'}
           className='text-blue-500 transform'
-          onClick={() =>
-            //history.push(buildRoute(['requester']))
-            setModal(true)
-          }
         />
         <Select
           options={EOptions as unknown as IOptionModel[]}
@@ -102,44 +96,8 @@ const Home = () => {
           action={'*тык*'}
           onClick={() => console.log('Bip-Bup')}
         />
-        <Window
-          show={modal}
-          title={
-            <div>
-              <span>Content Box</span>
-              <span
-                className='font-light text-sm underline ml-4'
-                onClick={() => console.log('Yes, I am')}
-              >
-                Clickable in title
-              </span>
-            </div>
-          }
-          specialActions={[
-            <div
-              className='w-12 h-8 px-3 py-1 flex flex-row items-center'
-              onClick={() => console.log('minimize')}
-            >
-              <MinusIcon className='w-6 h-6 text-gray-600' />
-            </div>,
-
-            <div
-              className='w-12 h-8 px-3 py-1 flex flex-row items-center'
-              onClick={() => console.log('minimize')}
-            >
-              <DesktopComputerIcon className='w-5 h-5 text-gray-600' />
-            </div>,
-          ]}
-          onClose={() => setModal(false)}
-        >
-          <div className='w-full bg-green-400'>Content</div>
-          <div className='w-full bg-green-400'>Content</div>
-          <div className='w-full bg-green-400'>Content</div>
-          <div className='w-full bg-green-400'>Content</div>
-        </Window>
         {menuInputs.contextMenu}
       </div>
-      <Footer options={['settings', 'quit']} />
     </>
   )
 }
