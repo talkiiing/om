@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import EntityModel, { parseType } from '../../../models/entity.model'
-import {
-  BookOpenIcon,
-  TrashIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+import { BookOpenIcon, TrashIcon, XIcon } from '@heroicons/react/outline'
 
 interface IEntityProps extends Partial<EntityModel> {}
 
@@ -21,7 +17,7 @@ const Card = (props: ICardProps) => {
   return (
     <div
       className={`${props.className} w-full ring-1 ring-gray-100 h-24 bg-white
-      relative rounded-md shadow-lg flex flex-col px-3 py-2 border-l-4 relative ${
+      relative rounded-md shadow-lg flex flex-col px-3 py-2 border-l-4 ${
         props.active ? 'border-green-400' : ''
       }`}
     >
@@ -30,11 +26,11 @@ const Card = (props: ICardProps) => {
         duration-200 ${side ? '' : 'pointer-events-none opacity-0 '}`}
         onClick={() => setSide(false)}
       >
-        <div className="text-gray-800 text-xl self-start text-left">
+        <div className='text-gray-800 text-xl self-start text-left'>
           {props.entity.name}
         </div>
         {props.entity.type && (
-          <div className="text-gray-600 text-sm self-end">
+          <div className='text-gray-600 text-sm self-end'>
             Тип: {parseType(props.entity.type)}
           </div>
         )}
@@ -47,26 +43,26 @@ const Card = (props: ICardProps) => {
         }`}
       >
         <button
-          className="text-gray-800 w-full h-full cursor-pointer 
+          className='text-gray-800 w-full h-full cursor-pointer 
         hover:bg-gray-50 active:bg-gray-100 focus:outline-none outline-none
-        transition-all duration-200"
+        transition-all duration-200'
           onClick={() => setSide(true)}
         >
-          <XIcon className="w-6 h-6 mx-auto" />
+          <XIcon className='w-6 h-6 mx-auto' />
         </button>
         <button
-          className="text-blue-400 w-full h-full cursor-pointer 
+          className='text-blue-400 w-full h-full cursor-pointer 
         hover:bg-gray-50 active:bg-gray-100 focus:outline-none outline-none
-        transition-all duration-200"
+        transition-all duration-200'
         >
-          <BookOpenIcon className="w-6 h-6 mx-auto" />
+          <BookOpenIcon className='w-6 h-6 mx-auto' />
         </button>
         <button
-          className="text-red-400 w-full h-full cursor-pointer 
+          className='text-red-400 w-full h-full cursor-pointer 
         hover:bg-gray-50 active:bg-gray-100 focus:outline-none outline-none
-        transition-all duration-200"
+        transition-all duration-200'
         >
-          <TrashIcon className="w-6 h-6 mx-auto" />
+          <TrashIcon className='w-6 h-6 mx-auto' />
         </button>
       </div>
     </div>
