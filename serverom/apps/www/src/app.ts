@@ -8,7 +8,7 @@ import { Application } from '@serverom/common/types';
 
 export const app: Application = feathersExpress(feathers());
 
-app.set('authentication', environment.authentication);
+Object.entries(environment).forEach(([key, value]) => app.set(key, value));
 
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true }));

@@ -1,22 +1,20 @@
 import * as feathersAuthentication from '@feathersjs/authentication';
-import * as local from '@feathersjs/authentication-local';
 
 const { authenticate } = feathersAuthentication.hooks;
-const { hashPassword, protect } = local.hooks;
 
 export const usersHooks = {
   before: {
-    all: [],
+    all: [(ctx) => console.log(ctx)],
     find: [authenticate('jwt')],
     get: [authenticate('jwt')],
-    create: [hashPassword('password')],
+    create: [],
     update: [],
-    patch: [authenticate('jwt'), hashPassword('password')],
+    patch: [authenticate('jwt')],
     remove: [authenticate('jwt')],
   },
 
   after: {
-    all: [protect('password')],
+    all: [],
     find: [],
     get: [],
     create: [],

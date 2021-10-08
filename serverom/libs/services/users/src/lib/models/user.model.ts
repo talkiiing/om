@@ -2,8 +2,8 @@ import { prop } from '@typegoose/typegoose';
 
 export class User {
   @prop()
-  public username!: string;
+  public email!: string;
 
   @prop()
-  public password!: string;
+  public auth0Id!: string;
 }
