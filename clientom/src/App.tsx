@@ -20,6 +20,7 @@ import {
   SettingsModel,
   StorageKeySettings,
 } from './store/settings/settings'
+import WithNavigation from './components/WithNavigation/WithNavigation'
 
 const App = () => {
   const history = useHistory()
@@ -27,7 +28,7 @@ const App = () => {
   const transitionRoot = useRef<HTMLDivElement>(null)
 
   const settings = useSelector(
-    (state: { settings: SettingsModel }) => state.settings
+    (state: { settings: SettingsModel }) => state.settings,
   )
   const dispatch = useDispatch()
 
@@ -38,7 +39,7 @@ const App = () => {
       },
       () => {
         history.push(buildRoute(['auth']))
-      }
+      },
     )
   }
   useEffect(() => {
@@ -59,50 +60,52 @@ const App = () => {
     const storedSettings = localStorage.getItem(StorageKeySettings)
     if (storedSettings)
       dispatch(
-        setOptions((JSON.parse(storedSettings) as SettingsModel).options)
+        setOptions((JSON.parse(storedSettings) as SettingsModel).options),
       )
 
     isNotificationsSupported() &&
       notificationService.send(
-        'Привет! Это уведомление от React PWA template, который сделан командой /talkiiing"'
+        'Привет! Это уведомление от React PWA template, который сделан командой /talkiiing"',
       )
 
     return () => document.removeEventListener('online', reAuth)
   }, [])
 
   return (
-    <div className="w-screen scroll-root" ref={appRootRef}>
-      <Route
-        render={({ location }) => (
-          <TransitionGroup>
-            <CSSTransition
-              key={location.pathname}
-              classNames={settings.options.animationType || 'none'}
-              timeout={settings.options.animationType === 'none' ? 0 : 601}
-              //nodeRef={transitionRoot}
-            >
-              <div className="w-full h-full" ref={transitionRoot}>
-                <div className="p-6 container max-w-3xl">
-                  <Switch location={location}>
-                    <Route path={buildRoute(['auth'])}>
-                      <Auth />
-                    </Route>
-                    <Route path={buildRoute(['requester'])}>
-                      <RequesterPage />
-                    </Route>
-                    <Route path={buildRoute(['settings'])}>
-                      <Settings />
-                    </Route>
-                    <Route path={buildRoute([])}>
-                      <Home />
-                    </Route>
-                  </Switch>
+    <div className='w-screen scroll-root' ref={appRootRef}>
+      <WithNavigation>
+        <Route
+          render={({ location }) => (
+            <TransitionGroup>
+              <CSSTransition
+                key={location.pathname}
+                classNames={settings.options.animationType || 'none'}
+                timeout={settings.options.animationType === 'none' ? 0 : 601}
+                //nodeRef={transitionRoot}
+              >
+                <div className='w-full h-full' ref={transitionRoot}>
+                  <div className='p-6 container max-w-3xl'>
+                    <Switch location={location}>
+                      <Route path={buildRoute(['auth'])}>
+                        <Auth />
+                      </Route>
+                      <Route path={buildRoute(['requester'])}>
+                        <RequesterPage />
+                      </Route>
+                      <Route path={buildRoute(['settings'])}>
+                        <Settings />
+                      </Route>
+                      <Route path={buildRoute([])}>
+                        <Home />
+                      </Route>
+                    </Switch>
+                  </div>
                 </div>
-              </div>
-            </CSSTransition>
-          </TransitionGroup>
-        )}
-      />
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
+      </WithNavigation>
     </div>
   )
 }

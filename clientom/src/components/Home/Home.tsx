@@ -68,13 +68,13 @@ const Home = () => {
   // @ts-ignore
   return (
     <>
-      <div className="grid grid-flow-row justify-items-center pt-10 gap-y-4">
-        <Logo className="mb-2 w-32 select-none" />
-        <p className="my-2 text-center">Template React App от /talkiiing</p>
+      <div className='grid grid-flow-row justify-items-center pt-10 gap-y-4'>
+        <Logo className='mb-2 w-32 select-none' />
+        <p className='my-2 text-center'>Template React App от /talkiiing</p>
         <Button
-          icon={() => <QrcodeIcon className="w-6 h-6" />}
+          icon={() => <QrcodeIcon className='w-6 h-6' />}
           value={'Запросы'}
-          className="text-blue-500 transform"
+          className='text-blue-500 transform'
           onClick={() =>
             //history.push(buildRoute(['requester']))
             setModal(true)
@@ -84,7 +84,7 @@ const Home = () => {
           options={EOptions as unknown as IOptionModel[]}
           model={single}
           label={'Single'}
-          className="w-full text-left"
+          className='w-full text-left'
           required={false}
           {...menuInputs.inject}
         />
@@ -92,7 +92,7 @@ const Home = () => {
           options={EOptions as unknown as IOptionModel[]}
           model={multi}
           label={'Multi'}
-          className="w-44 text-left"
+          className='w-44 text-left'
           required={false}
           {...menuInputs.inject}
         />
@@ -108,7 +108,7 @@ const Home = () => {
             <div>
               <span>Content Box</span>
               <span
-                className="font-light text-sm underline ml-4"
+                className='font-light text-sm underline ml-4'
                 onClick={() => console.log('Yes, I am')}
               >
                 Clickable in title
@@ -117,25 +117,25 @@ const Home = () => {
           }
           specialActions={[
             <div
-              className="w-12 h-8 px-3 py-1 flex flex-row items-center"
+              className='w-12 h-8 px-3 py-1 flex flex-row items-center'
               onClick={() => console.log('minimize')}
             >
-              <MinusIcon className="w-6 h-6 text-gray-600" />
+              <MinusIcon className='w-6 h-6 text-gray-600' />
             </div>,
 
             <div
-              className="w-12 h-8 px-3 py-1 flex flex-row items-center"
+              className='w-12 h-8 px-3 py-1 flex flex-row items-center'
               onClick={() => console.log('minimize')}
             >
-              <DesktopComputerIcon className="w-5 h-5 text-gray-600" />
+              <DesktopComputerIcon className='w-5 h-5 text-gray-600' />
             </div>,
           ]}
           onClose={() => setModal(false)}
         >
-          <div className="w-full bg-green-400">Content</div>
-          <div className="w-full bg-green-400">Content</div>
-          <div className="w-full bg-green-400">Content</div>
-          <div className="w-full bg-green-400">Content</div>
+          <div className='w-full bg-green-400'>Content</div>
+          <div className='w-full bg-green-400'>Content</div>
+          <div className='w-full bg-green-400'>Content</div>
+          <div className='w-full bg-green-400'>Content</div>
         </Window>
         {menuInputs.contextMenu}
       </div>

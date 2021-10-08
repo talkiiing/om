@@ -1,6 +1,6 @@
 {
   "name": "planka",
-  "version": "1.6.23.10",
+  "version": "1.10.8",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
