@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'www-gateway',
+      name: 'www-serverom',
       script: './dist/apps/www/main.js',
       instances: 1,
       env_production: {
@@ -15,10 +15,10 @@ module.exports = {
       host: '3.68.13.118',
       key: 'deploy.key',
       ref: 'origin/master',
-      repo: 'https://github.com/talkiiing/om',
+      repo: 'git@github.com-deploy-serverom:talkiiing/om',
       path: '/home/ubuntu/apps/om',
       'post-deploy':
-        'cd serverio && npm ci && pwd && npm run build && pm2 reload ecosystem.config.js --env production && pm2 save',
+        'cd serverom && npm ci && pwd && npm run build && pm2 reload ecosystem.config.js --env production && pm2 save',
     },
   },
 };
