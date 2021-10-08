@@ -15,6 +15,7 @@ import useContextMenu from '../../ui/ContextMenu/useContextMenu'
 import Window from '../../ui/Window/Window'
 import { Motion, spring } from 'react-motion'
 import ActionCard from '../../ui/ActionCard/ActionCard'
+import List from '../../ui/ListSet/List'
 
 export const EOptions: IOptionModel[] = [
   { id: 'one', value: 'One' },
@@ -66,7 +67,10 @@ const Home = () => {
   // @ts-ignore
   return (
     <>
-      <div className='grid grid-flow-row justify-items-center pt-10 gap-y-4'>
+      <div className='pt-2 pl-12'>
+        <List/>
+      </div>
+      <div className='hidden grid grid-flow-row justify-items-center pt-10 gap-y-4'>
         <Logo className='mb-2 w-32 select-none' />
         <p className='my-2 text-center'>Template React App от /talkiiing</p>
         <Button

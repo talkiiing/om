@@ -65,6 +65,8 @@ module.exports = {
           900: '#381471',
         },
         omblack: '#181824',
+        omgray: '#242425',
+        omgray2: '#2B2B3F',
         omwhite: '#ffffff',
       },
     },

@@ -84,7 +84,7 @@ const App = () => {
                 //nodeRef={transitionRoot}
               >
                 <div className='w-full h-full' ref={transitionRoot}>
-                  <div className='p-6 container max-w-3xl'>
+                  <div className='p-6'>  {/* previous className="p-6 container max-w-3xl"*/}
                     <Switch location={location}>
                       <Route path={buildRoute(['auth'])}>
                         <Auth />
