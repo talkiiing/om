@@ -14,7 +14,7 @@ const GlowButton = (props: IButtonProps) => {
     <button
       className={`
          ${props.disabled ? 'shadow-sm pointer-events-none opacity-50' : ''} ${
-        props.className
+        props.className || ''
       } ${
         !props.type || props.type === 'solid'
           ? ' bg-omblue-500 hover:bg-omblue-600 active:bg-omblue-700 focus:bg-omblue-700 '
