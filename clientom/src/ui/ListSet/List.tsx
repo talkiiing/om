@@ -31,7 +31,7 @@ const menuOptions: ListElemOptionProps[] = [
 
 const List = () => {
   return (
-    <div className='bg-omgray min-w-80 w-1/3 h-screen rounded-2xl p-3 space-y-2'>
+    <div className='bg-omgray min-w-80 w-1/3 h-full rounded-2xl p-3 space-y-2'>
       <h3 className='text-omwhite text-xl pl-3 pt-1'>Lists</h3>
       <div className='flex flex-col items-start gap-4'>
         {menuOptions.map((v, i) => (
