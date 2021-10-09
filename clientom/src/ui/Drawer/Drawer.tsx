@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { CogIcon, UserIcon } from '@heroicons/react/outline'
+import {
+  DatabaseIcon,
+  CodeIcon,
+  MapIcon,
+} from '@heroicons/react/outline'
 import useQuery from '../utils/useQuery'
+import usePath from '../utils/usePath'
 
 interface DrawerOptionProps {
   Icon: React.ElementType
@@ -34,6 +39,8 @@ const Drawer = () => {
 
   const { query, queryPush, queryPatch } = useQuery()
 
+  const { go } = usePath()
+
   useEffect(() => {
     console.log(query.toString())
   }, [query])
@@ -41,14 +48,19 @@ const Drawer = () => {
   const menuOptions: DrawerOptionProps[] = useMemo(
     () => [
       {
-        Icon: UserIcon,
-        title: 'User',
-        onClick: () => queryPatch({ user: 'true' }),
+        Icon: DatabaseIcon,
+        title: 'Наборы данных',
+        onClick: () => go('/datasets'),
       },
       {
-        Icon: CogIcon,
-        title: 'Settings',
-        onClick: () => queryPush({ params: 'onlySettings' }),
+        Icon: CodeIcon,
+        title: 'Om-ы',
+        onClick: () => go('/oms'),
+      },
+      {
+        Icon: MapIcon,
+        title: 'Мои пайплайны',
+        onClick: () => go('/pipelines'),
       },
     ],
     [queryPatch, queryPush],

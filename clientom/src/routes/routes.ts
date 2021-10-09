@@ -4,11 +4,14 @@ const routes = {
     up: 'up',
     default: 'auth',
   },
-  settings: {
-    default: 'settings',
+  datasets: {
+    default: 'datasets',
   },
-  requester: {
-    default: 'requester',
+  oms: {
+    default: 'oms',
+  },
+  pipelines: {
+    default: 'pipelines',
   },
 
   default: '',

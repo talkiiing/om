@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from '../../ui/Button'
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import Footer from '../../components/Footer/Footer'
 import UserModel from '../../models/user.model'
 import {
-  DesktopComputerIcon,
-  MinusIcon,
   QrcodeIcon,
 } from '@heroicons/react/outline'
 import useSelect from '../../ui/utils/useSelect'
 import Select, { IOptionModel } from '../../ui/Select'
 import useContextMenu from '../../ui/ContextMenu/useContextMenu'
-import Window from '../../ui/Window/Window'
 import { Motion, spring } from 'react-motion'
 import ActionCard from '../../ui/ActionCard/ActionCard'
 import List from '../../ui/ListSet/List'

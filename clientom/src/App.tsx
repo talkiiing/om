@@ -4,15 +4,17 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './misc/router-animations.css'
 import './misc/additional-animations.css'
 import backly from './services/backly/backly'
-import Auth from './components/Auth/Auth'
-import Home from './pages/Home/Home'
 import { buildRoute } from './routes/routes'
-import RequesterPage from './components/RequesterPage/RequesterPage'
 import {
   isNotificationsSupported,
   notificationService,
 } from './services/notifications/notifications'
-import Settings from './components/Settings/Settings'
+
+import Auth from './pages/Auth/Auth';
+import Home from './pages/Home/Home';
+import Datasets from './pages/Datasets/Datasets';
+import Oms from './pages/Oms/Oms';
+import Pipelines from './pages/Pipelines/Pipelines';
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -89,12 +91,16 @@ const App = () => {
                       <Route path={buildRoute(['auth'])}>
                         <Auth />
                       </Route>
-                      <Route path={buildRoute(['requester'])}>
-                        <RequesterPage />
+                      <Route path={buildRoute(['datasets'])}>
+                        <Datasets />
                       </Route>
-                      <Route path={buildRoute(['settings'])}>
-                        <Settings />
+                      <Route path={buildRoute(['oms'])}>
+                        <Oms />
                       </Route>
+                      <Route path={buildRoute(['pipelines'])}>
+                        <Pipelines />
+                      </Route>
+
                       <Route path={buildRoute([])}>
                         <Home />
                       </Route>
