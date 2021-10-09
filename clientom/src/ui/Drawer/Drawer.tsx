@@ -18,7 +18,7 @@ const DrawerOption = (props: DrawerOptionProps) => {
       onClick={() => props.onClick && props.onClick()}
     >
       <div className='!w-12 h-12 p-3'>
-        <Icon className='w-6 h-6 text-black' />
+        <Icon className='w-6 h-6' />
       </div>
       <div className={`${props.expanded ? 'opacity-100' : 'opacity-0'} text`}>
         {title}
@@ -65,7 +65,7 @@ const Drawer = () => {
   return (
     <div
       className={`${
-        expanded ? 'w-80' : 'w-12'
+        expanded ? 'w-60' : 'w-12'
       } transition-all duration-100 drawer fixed top-16 left-0 h-[calc(100%-4rem)] bg-gray-700 overflow-x-hidden`}
       onMouseEnter={() => setMouseOn(true)}
       onMouseLeave={() => setMouseOn(false)}
