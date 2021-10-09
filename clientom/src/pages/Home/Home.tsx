@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from '../../ui/Button'
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import Footer from '../Footer/Footer'
+import Footer from '../../components/Footer/Footer'
 import UserModel from '../../models/user.model'
 import {
   DesktopComputerIcon,

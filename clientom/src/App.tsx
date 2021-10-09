@@ -5,7 +5,7 @@ import './misc/router-animations.css'
 import './misc/additional-animations.css'
 import backly from './services/backly/backly'
 import Auth from './components/Auth/Auth'
-import Home from './components/Home/Home'
+import Home from './pages/Home/Home'
 import { buildRoute } from './routes/routes'
 import RequesterPage from './components/RequesterPage/RequesterPage'
 import {
