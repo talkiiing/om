@@ -3,6 +3,7 @@ import feathersExpress from '@feathersjs/express';
 import * as express from 'express';
 import { environment } from './environments/environment';
 import { Application } from '@serverom/common/types';
+import cors from 'cors';
 import { setupServices } from './services';
 
 export const app: Application = feathersExpress(feathers());
@@ -11,6 +12,7 @@ Object.entries(environment).forEach(([key, value]) => app.set(key, value));
 
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.configure(feathersExpress.rest());
 
 app.configure(setupServices);
