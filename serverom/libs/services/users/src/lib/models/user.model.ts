@@ -1,9 +1,9 @@
 import { prop } from '@typegoose/typegoose';
 
 export class User {
-  @prop()
+  @prop({ required: true })
   public email!: string;
 
-  @prop()
+  @prop({ required: true })
   public auth0Id!: string;
 }

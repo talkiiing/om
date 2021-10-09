@@ -45,6 +45,138 @@
         }
       }
     },
+    "services-computations": {
+      "root": "libs/services/computations",
+      "sourceRoot": "libs/services/computations/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/computations/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/computations"],
+          "options": {
+            "jestConfig": "libs/services/computations/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-datahub-datasets": {
+      "root": "libs/services/datahub-datasets",
+      "sourceRoot": "libs/services/datahub-datasets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/datahub-datasets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/datahub-datasets"],
+          "options": {
+            "jestConfig": "libs/services/datahub-datasets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-datasets": {
+      "root": "libs/services/datasets",
+      "sourceRoot": "libs/services/datasets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/datasets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/datasets"],
+          "options": {
+            "jestConfig": "libs/services/datasets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-features": {
+      "root": "libs/services/features",
+      "sourceRoot": "libs/services/features/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/features/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/features"],
+          "options": {
+            "jestConfig": "libs/services/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-notifications": {
+      "root": "libs/services/notifications",
+      "sourceRoot": "libs/services/notifications/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/notifications/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/notifications"],
+          "options": {
+            "jestConfig": "libs/services/notifications/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-pipelines": {
+      "root": "libs/services/pipelines",
+      "sourceRoot": "libs/services/pipelines/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/services/pipelines/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services/pipelines"],
+          "options": {
+            "jestConfig": "libs/services/pipelines/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "services-users": {
       "root": "libs/services/users",
       "sourceRoot": "libs/services/users/src",

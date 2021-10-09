@@ -20,6 +20,18 @@
       "@serverom/services/authentication": [
         "libs/services/authentication/src/index.ts"
       ],
+      "@serverom/services/computations": [
+        "libs/services/computations/src/index.ts"
+      ],
+      "@serverom/services/datahub-datasets": [
+        "libs/services/datahub-datasets/src/index.ts"
+      ],
+      "@serverom/services/datasets": ["libs/services/datasets/src/index.ts"],
+      "@serverom/services/features": ["libs/services/features/src/index.ts"],
+      "@serverom/services/notifications": [
+        "libs/services/notifications/src/index.ts"
+      ],
+      "@serverom/services/pipelines": ["libs/services/pipelines/src/index.ts"],
       "@serverom/services/users": ["libs/services/users/src/index.ts"]
     }
   },

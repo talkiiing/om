@@ -12,6 +12,7 @@ declare module '@serverom/common/types' {
 }
 
 export function setupUsersService(app: Application) {
+  console.log('registering users');
   app.use(
     Services.Users,
     new UsersService(

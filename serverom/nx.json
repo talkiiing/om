@@ -33,6 +33,24 @@
     "services-authentication": {
       "tags": []
     },
+    "services-computations": {
+      "tags": []
+    },
+    "services-datahub-datasets": {
+      "tags": []
+    },
+    "services-datasets": {
+      "tags": []
+    },
+    "services-features": {
+      "tags": []
+    },
+    "services-notifications": {
+      "tags": []
+    },
+    "services-pipelines": {
+      "tags": []
+    },
     "services-users": {
       "tags": []
     },

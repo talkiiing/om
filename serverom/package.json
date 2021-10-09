@@ -37,6 +37,7 @@
     "@feathersjs/express": "^4.5.11",
     "@feathersjs/feathers": "^4.5.11",
     "@typegoose/typegoose": "^9.0.2",
+    "axios": "^0.22.0",
     "dotenv": "^10.0.0",
     "feathers-mongoose": "^8.4.0",
     "mongoose": "^6.0.8",

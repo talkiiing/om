@@ -5,6 +5,9 @@ export const environment = {
   production: false,
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || 8080,
+  clientURL: process.env.CLIENT_URL || 'https://om.talkiiing.ru',
+  datahubURL:
+    process.env.DATAHUB_URL || 'http://datahub.yc.pbd.ai:9002/api/graphql',
   authentication: {
     entity: 'user',
     service: 'users',

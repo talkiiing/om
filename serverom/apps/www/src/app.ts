@@ -1,10 +1,9 @@
 import feathers from '@feathersjs/feathers';
 import feathersExpress from '@feathersjs/express';
 import * as express from 'express';
-import { setupUsersService } from '@serverom/services/users';
 import { environment } from './environments/environment';
-import { setupAuthenticationService } from '@serverom/services/authentication';
 import { Application } from '@serverom/common/types';
+import { setupServices } from './services';
 
 export const app: Application = feathersExpress(feathers());
 
@@ -14,8 +13,11 @@ app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.configure(feathersExpress.rest());
 
-app.configure(setupUsersService);
-app.configure(setupAuthenticationService);
+app.configure(setupServices);
+
+app.get('/', (req, res) =>
+  res.redirect(req.query.redirect || environment.clientURL)
+);
 
 app.use(feathersExpress.notFound());
 app.use(feathersExpress.errorHandler());
