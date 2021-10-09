@@ -3,7 +3,7 @@ import feathersExpress from '@feathersjs/express';
 import * as express from 'express';
 import { environment } from './environments/environment';
 import { Application } from '@serverom/common/types';
-import cors from 'cors';
+import * as cors from 'cors';
 import { setupServices } from './services';
 
 export const app: Application = feathersExpress(feathers());
