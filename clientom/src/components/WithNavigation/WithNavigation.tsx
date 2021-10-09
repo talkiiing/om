@@ -3,8 +3,6 @@ import Drawer from '../../ui/Drawer/Drawer'
 import Input from '../../ui/Input'
 import useInput from '../../ui/utils/useInput'
 import GlowButton from '../../ui/GlowButton'
-import auth from '@feathersjs/authentication-client'
-import { useCallback } from 'react'
 import usePath from '../../ui/utils/usePath'
 import { buildRoute } from '../../routes/routes'
 import useAuth from '../../ui/utils/useAuth'
@@ -17,18 +15,7 @@ const WithNavigation = ({
   const inputModel = useInput('')
   const { go } = usePath()
 
-  const { authenticated } = useAuth()
-
-  const auth = useCallback(() => {
-    window.open(
-      'https://om.s.ix3.space/oauth/auth0?' +
-        new URLSearchParams({
-          redirect:
-            '?redirect=' +
-            encodeURIComponent('http://localhost:3000/auth-confirm'),
-        }),
-    )
-  }, [])
+  const { authenticated, logout, login } = useAuth()
 
   return (
     <>
@@ -44,14 +31,14 @@ const WithNavigation = ({
             <GlowButton
               type={'outline'}
               value={'Войти через Auth0'}
-              onClick={() => auth()}
+              onClick={() => login()}
             />
           ) : (
             <GlowButton
               type={'outline'}
               value={'Завершить сессию'}
               onClick={() => {
-                localStorage.removeItem('accessToken')
+                logout()
                 go(buildRoute([]))
               }}
             />

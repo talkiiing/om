@@ -1,5 +1,5 @@
 import Steps from './Steps'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ReactComponent as CreateLogo } from '../../assets/createDataset.svg'
 import { ReactComponent as SelectDSLogo } from '../../assets/selectDataset.svg'
 import SelectOmLogo from '../../assets/selectFeature.png'
@@ -7,6 +7,8 @@ import { ReactComponent as ConfigureLogo } from '../../assets/createDataset.svg'
 import GlowButton from '../../ui/GlowButton'
 import Select from '../../ui/Select'
 import useSelect from '../../ui/utils/useSelect'
+import useCached from '../../ui/utils/useCached'
+import { app } from '../../services/feathers/feathers'
 
 const testDatasets = [
   {
@@ -30,6 +32,15 @@ const testDatasets = [
 const DatasetMaster = () => {
   const [page, setPage] = useState<number>(0)
   const baseDatasetModel = useSelect('')
+
+  const { data: datasets } = useCached('datasets', () =>
+    app.service('datasets').find(),
+  )
+
+  useEffect(() => {
+    console.log(datasets)
+  }, [datasets])
+
   const activePage = useMemo(() => {
     switch (page) {
       case 0:

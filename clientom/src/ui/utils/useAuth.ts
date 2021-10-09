@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { app } from '../../services/feathers/feathers'
 
 const useAuth = () => {
   const [accessToken, setAccessToken] = useState<string>('')
@@ -8,7 +9,7 @@ const useAuth = () => {
   }, [])
 
   const patchStorageToken = useCallback((token: string) => {
-    window.localStorage.setItem('accessToken', token)
+    app.authentication.setAccessToken(token)
     setAccessToken(token)
   }, [])
 
@@ -26,10 +27,29 @@ const useAuth = () => {
 
   const userGroup = useMemo(() => 'dev', [])
 
+  const login = useCallback(() => {
+    window.open(
+      'https://om.s.ix3.space/oauth/auth0?' +
+        new URLSearchParams({
+          redirect:
+            '?redirect=' +
+            encodeURIComponent('http://localhost:3000/auth-confirm'),
+        }),
+    )
+  }, [])
+
+  const logout = useCallback(() => {
+    setAccessToken('')
+    window.localStorage.removeItem('accessToken')
+    app.authentication.logout()
+  }, [])
+
   return {
     authenticated,
     userGroup,
     patchStorageToken,
+    login,
+    logout,
   }
 }
 
