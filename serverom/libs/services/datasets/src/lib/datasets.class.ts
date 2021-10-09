@@ -37,44 +37,54 @@ export class DatasetsService extends Service<Dataset> {
       })) as Dataset;
     }
 
-    // from pipeline
-    const pipeline = (await this.app.services[Services.Pipelines].get(
-      data.pipeline
-    )) as Pipeline;
+    (async () => {
+      // from pipeline
+      const pipeline = (await this.app.services[Services.Pipelines].get(
+        data.pipeline
+      )) as Pipeline;
 
-    const { steps, initialDataset, pairDataset } = pipeline;
+      const { steps, initialDataset, pairDataset } = pipeline;
 
-    const { data: initialDatasetData } = (await this.app.services[
-      Services.Datasets
-    ].get(initialDataset)) as Dataset;
-    const { data: pairDatasetData } = (await this.app.services[
-      Services.Datasets
-    ].get(pairDataset)) as Dataset;
+      const { data: initialDatasetData } = (await this.app.services[
+        Services.Datasets
+      ].get(initialDataset)) as Dataset;
+      const { data: pairDatasetData } = pairDataset
+        ? ((await this.app.services[Services.Datasets].get(
+            pairDataset
+          )) as Dataset)
+        : { data: null };
 
-    const fns = await Promise.all(
-      steps.map(async ({ meta, feature }) => {
-        const { source } = (await this.app.services[Services.Features].get(
-          feature
-        )) as Feature;
+      const fns = await Promise.all(
+        steps.map(async ({ meta, feature }) => {
+          const { source } = (await this.app.services[Services.Features].get(
+            feature
+          )) as Feature;
 
-        const fn = eval(source) as (
-          meta: Record<string, string>,
-          initialData: Dataset['data'],
-          pairData?: Dataset['data']
-        ) => any;
+          const fn = eval(source) as (
+            meta: Record<string, string>,
+            initialData: Dataset['data'],
+            pairData?: Dataset['data']
+          ) => any;
 
-        return { fn, meta };
-      })
-    );
+          return { fn, meta };
+        })
+      );
 
-    const newData = fns.reduce(
-      (result, { meta, fn }) => fn(meta, initialDatasetData, pairDatasetData),
-      initialDatasetData
-    );
+      const newData = fns.reduce(
+        (result, { meta, fn }) => fn(meta, result, pairDatasetData),
+        initialDatasetData
+      );
 
-    return (await super.create({
-      name: data.name,
-      data: newData,
-    })) as Dataset;
+      super.create({
+        pipeline: data.pipeline,
+        name: data.name,
+        data: newData,
+      });
+    })();
+
+    return {
+      // @ts-ignore
+      pending: true,
+    };
   }
 }

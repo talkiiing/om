@@ -1,4 +1,5 @@
-import { prop } from '@typegoose/typegoose';
+import { prop, Ref } from '@typegoose/typegoose';
+import { Pipeline } from '@serverom/services/pipelines';
 
 export class Dataset {
   @prop({ required: true })
@@ -6,4 +7,7 @@ export class Dataset {
 
   @prop()
   public name!: string;
+
+  @prop({ ref: () => Pipeline })
+  public pipeline?: Ref<Pipeline>;
 }
