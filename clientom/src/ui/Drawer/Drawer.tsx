@@ -18,7 +18,7 @@ const DrawerOption = (props: DrawerOptionProps) => {
       onClick={() => props.onClick && props.onClick()}
     >
       <div className='!w-12 h-12 p-3'>
-        <Icon className='w-6 h-6' />
+        <Icon className='w-6 h-6 text-black' />
       </div>
       <div className={`${props.expanded ? 'opacity-100' : 'opacity-0'} text`}>
         {title}
