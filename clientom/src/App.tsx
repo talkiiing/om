@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './misc/router-animations.css'
 import './misc/additional-animations.css'
 import backly from './services/backly/backly'
@@ -78,37 +77,28 @@ const App = () => {
       <WithNavigation>
         <Route
           render={({ location }) => (
-            <TransitionGroup>
-              <CSSTransition
-                key={location.pathname}
-                classNames={settings.options.animationType || 'none'}
-                timeout={settings.options.animationType === 'none' ? 0 : 601}
-                //nodeRef={transitionRoot}
-              >
-                <div className='w-full' ref={transitionRoot}>
-                  <div className='p-6 h-route-full'>  {/* previous className="p-6 container max-w-3xl"*/}
-                    <Switch location={location}>
-                      <Route path={buildRoute(['auth'])}>
-                        <Auth />
-                      </Route>
-                      <Route path={buildRoute(['datasets'])}>
-                        <Datasets />
-                      </Route>
-                      <Route path={buildRoute(['oms'])}>
-                        <Oms />
-                      </Route>
-                      <Route path={buildRoute(['pipelines'])}>
-                        <Pipelines />
-                      </Route>
+            <div className='w-full' ref={transitionRoot}>
+              <div className='h-route-full'>  {/* previous className="p-6 container max-w-3xl"*/}
+                <Switch location={location}>
+                  <Route path={buildRoute(['auth'])}>
+                    <Auth />
+                  </Route>
+                  <Route path={buildRoute(['datasets'])}>
+                    <Datasets />
+                  </Route>
+                  <Route path={buildRoute(['oms'])}>
+                    <Oms />
+                  </Route>
+                  <Route path={buildRoute(['pipelines'])}>
+                    <Pipelines />
+                  </Route>
 
-                      <Route path={buildRoute([])}>
-                        <Home />
-                      </Route>
-                    </Switch>
-                  </div>
-                </div>
-              </CSSTransition>
-            </TransitionGroup>
+                  <Route path={buildRoute([])}>
+                    <Home />
+                  </Route>
+                </Switch>
+              </div>
+            </div>
           )}
         />
       </WithNavigation>
