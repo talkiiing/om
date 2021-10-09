@@ -9,11 +9,11 @@ import {
   notificationService,
 } from './services/notifications/notifications'
 
-import Auth from './pages/Auth/Auth';
-import Home from './pages/Home/Home';
-import Datasets from './pages/Datasets/Datasets';
-import Oms from './pages/Oms/Oms';
-import Pipelines from './pages/Pipelines/Pipelines';
+import Auth from './pages/Auth/Auth'
+import Home from './pages/Home/Home'
+import Datasets from './pages/Datasets/Datasets'
+import Oms from './pages/Oms/Oms'
+import Pipelines from './pages/Pipelines/Pipelines'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -22,6 +22,7 @@ import {
   StorageKeySettings,
 } from './store/settings/settings'
 import WithNavigation from './components/WithNavigation/WithNavigation'
+import AuthConfirm from './pages/AuthConfirm'
 
 const App = () => {
   const history = useHistory()
@@ -78,7 +79,9 @@ const App = () => {
         <Route
           render={({ location }) => (
             <div className='w-full' ref={transitionRoot}>
-              <div className='h-route-full'>  {/* previous className="p-6 container max-w-3xl"*/}
+              <div className='h-route-full'>
+                {' '}
+                {/* previous className="p-6 container max-w-3xl"*/}
                 <Switch location={location}>
                   <Route path={buildRoute(['auth'])}>
                     <Auth />
@@ -91,6 +94,9 @@ const App = () => {
                   </Route>
                   <Route path={buildRoute(['pipelines'])}>
                     <Pipelines />
+                  </Route>
+                  <Route path={buildRoute(['authConfirm'])}>
+                    <AuthConfirm />
                   </Route>
 
                   <Route path={buildRoute([])}>

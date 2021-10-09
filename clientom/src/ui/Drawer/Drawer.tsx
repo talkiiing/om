@@ -20,13 +20,17 @@ const DrawerOption = (props: DrawerOptionProps) => {
   const { Icon, title } = props
   return (
     <div
-      className='flex w-full h-12 items-center hover:bg-gray-600 space-x-3 text-gray-50'
+      className='flex w-full h-12 items-center select-none cursor-pointer hover:bg-gray-600 space-x-3 text-gray-50'
       onClick={() => props.onClick && props.onClick()}
     >
       <div className='!w-12 h-12 p-3'>
         <Icon className='w-6 h-6' />
       </div>
-      <div className={`${props.expanded ? 'opacity-100' : 'opacity-0'} text`}>
+      <div
+        className={`${
+          props.expanded ? 'opacity-100' : 'opacity-0'
+        } text whitespace-nowrap`}
+      >
         {title}
       </div>
     </div>

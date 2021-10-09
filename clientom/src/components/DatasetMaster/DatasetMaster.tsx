@@ -2,7 +2,7 @@ import Steps from './Steps'
 import { useMemo, useState } from 'react'
 import { ReactComponent as CreateLogo } from '../../assets/createDataset.svg'
 import { ReactComponent as SelectDSLogo } from '../../assets/selectDataset.svg'
-import { ReactComponent as SelectOmLogo } from '../../assets/selectFeature.svg'
+import SelectOmLogo from '../../assets/selectFeature.png'
 import { ReactComponent as ConfigureLogo } from '../../assets/createDataset.svg'
 import GlowButton from '../../ui/GlowButton'
 import Select from '../../ui/Select'
@@ -38,7 +38,7 @@ const DatasetMaster = () => {
             <CreateLogo className={`h-56 mb-14 transform -translate-x-4`} />
             <h1 className='text-white '>Создание набора данных</h1>
             <GlowButton
-              value={'Поехали!'}
+              value={'Начать!'}
               type={'solid'}
               className='w-44 mt-10'
               onClick={() => setPage((v) => v + 1)}
@@ -49,17 +49,40 @@ const DatasetMaster = () => {
         return (
           <>
             <SelectDSLogo className={`h-56 mb-14 transform -translate-x-4`} />
-            <h1 className='text-white '>Выбери базовый набор данных</h1>
+            <h1 className='text-white '>Выберите базовый набор</h1>
             <Select
               model={baseDatasetModel}
               options={testDatasets}
-              className={'w-60 mt-6'}
+              className={'w-60 mt-12'}
               label={'Выберите набор...'}
             />
             <GlowButton
-              value={'Поехали!'}
+              value={'Далее...'}
               type={'solid'}
-              className='w-44 mt-10'
+              className='w-44 mt-8'
+              onClick={() => setPage((v) => v + 1)}
+            />
+          </>
+        )
+      case 2:
+        return (
+          <>
+            <img
+              src={SelectOmLogo}
+              className={`h-56 mb-14 transform -translate-x-4`}
+              alt={'Adding Om'}
+            />
+            <h1 className='text-white '>Выберите Om</h1>
+            <Select
+              model={baseDatasetModel}
+              options={testDatasets}
+              className={'w-60 mt-12'}
+              label={'Выберите набор...'}
+            />
+            <GlowButton
+              value={'Далее...'}
+              type={'solid'}
+              className='w-44 mt-8'
               onClick={() => setPage((v) => v + 1)}
             />
           </>

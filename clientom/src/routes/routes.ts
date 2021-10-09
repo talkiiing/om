@@ -13,6 +13,9 @@ const routes = {
   pipelines: {
     default: 'pipelines',
   },
+  authConfirm: {
+    default: 'auth-confirm',
+  },
 
   default: '',
 }
