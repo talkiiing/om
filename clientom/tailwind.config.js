@@ -10,6 +10,9 @@ module.exports = {
     container: {
       center: true,
     },
+    minWidth: {
+      '80': '20rem',
+    },
     extend: {
       maxHeight: {
         12: '3rem',
