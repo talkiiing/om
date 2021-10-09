@@ -10,10 +10,13 @@ module.exports = {
     container: {
       center: true,
     },
-    minWidth: {
-      '80': '20rem',
-    },
     extend: {
+      height: {
+        'route-full': 'calc(100vh - 4rem)',
+      },
+      minWidth: {
+        '80': '20rem',
+      },
       maxHeight: {
         12: '3rem',
       },
