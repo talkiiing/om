@@ -1,39 +1,39 @@
-import { CogIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon } from '@heroicons/react/outline'
 
 interface ListElemOptionProps {
-  title: string
+  text: string
+  onClick?: () => void
 }
 
 const ListElem = (props: ListElemOptionProps) => {
-  const { title } = props
+  const { text } = props
   return (
     <div className='flex w-full items-center justify-between bg-omgray2 shadow-md rounded-md py-4 pl-6 pr-4 hover:bg-omblack cursor-pointer'>
-      <h3 className='text-omwhite text-2xl'>{title}</h3>
+      <h3 className='text-omwhite text-2xl'>{text}</h3>
 
       <div className='flex items-center justify-center'>
-        <CogIcon className='w-6 h-6 text-omwhite' />
+        <ChevronRightIcon className='w-6 h-6 text-omwhite' />
       </div>
     </div>
   )
 }
 
-const menuOptions: ListElemOptionProps[] = [
-  {
-    title: 'Dataset Info',
-  },
-  {
-    title: 'Billing Methods',
-  },
-]
+interface ListProps {
+  elements: ListElemOptionProps[]
+  className: string
+}
 
-const List = () => {
+const List = (props: ListProps) => {
+  const { elements, className } = props
+
   return (
-    <div className='bg-omgray min-w-80 w-1/3 rounded-2xl p-3 space-y-2'>
-      <h3 className='text-omwhite text-xl pl-3 pt-1'>Lists</h3>
-      <div className='flex flex-col items-start gap-4'>
-        {menuOptions.map((v, i) => (
-          <ListElem title={v.title} key={v.title} />
-        ))}
+    <div className={ className }>
+      <div className='h-full w-full bg-omgray min-w-80 rounded-2xl p-3 space-y-2'>
+        <div className='h-full flex flex-col items-start gap-4'>
+          {elements.map((v, i) => (
+            <ListElem text={v.text} key={v.text} />
+          ))} 
+        </div>
       </div>
     </div>
   )

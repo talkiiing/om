@@ -1,6 +1,8 @@
 function Pipelines() {
   return (
-    <div>pipelines</div>
+    <div className='h-full'>
+      
+    </div>
   );
 }
 

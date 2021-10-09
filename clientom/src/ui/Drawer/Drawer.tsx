@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import {
+  HomeIcon,
   DatabaseIcon,
   CodeIcon,
   MapIcon,
@@ -47,6 +48,11 @@ const Drawer = () => {
 
   const menuOptions: DrawerOptionProps[] = useMemo(
     () => [
+      {
+        Icon: HomeIcon,
+        title: 'Центральная панель',
+        onClick: () => go('/'),
+      },
       {
         Icon: DatabaseIcon,
         title: 'Наборы данных',
