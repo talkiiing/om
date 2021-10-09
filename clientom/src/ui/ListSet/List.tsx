@@ -7,8 +7,8 @@ interface ListElemOptionProps {
 const ListElem = (props: ListElemOptionProps) => {
   const { title } = props
   return (
-    <div className='flex w-full items-center justify-between bg-omgray2 shadow-md rounded-md py-4 pl-6 pr-4 hover:bg-omblack'>
-      <h3 className='text-omwhite text-2xl cursor-pointer'>{title}</h3>
+    <div className='flex w-full items-center justify-between bg-omgray2 shadow-md rounded-md py-4 pl-6 pr-4 hover:bg-omblack cursor-pointer'>
+      <h3 className='text-omwhite text-2xl'>{title}</h3>
 
       <div className='flex items-center justify-center'>
         <CogIcon className='w-6 h-6 text-omwhite' />
