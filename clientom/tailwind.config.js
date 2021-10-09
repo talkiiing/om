@@ -15,7 +15,7 @@ module.exports = {
         'route-full': 'calc(100vh - 4rem)',
       },
       minWidth: {
-        '80': '20rem',
+        80: '20rem',
       },
       maxHeight: {
         12: '3rem',
@@ -71,6 +71,7 @@ module.exports = {
           900: '#381471',
         },
         omblack: '#181824',
+        omsteps: '#374151',
         omgray: '#242435',
         omgray2: '#2B2B3F',
         omwhite: '#ffffff',
