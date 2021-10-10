@@ -12,6 +12,20 @@ declare module '@serverom/common/types' {
 }
 
 export function setupPipelineService(app: Application) {
+  app.get('/download/' + Services.Pipelines + '/:id', async (req, res) => {
+    const data: Pipeline = await app.services[Services.Pipelines].get(
+      req.params.id
+    );
+
+    res.setHeader(
+      'Content-disposition',
+      'attachment; filename=' + data.name + '.json'
+    );
+
+    res.write(JSON.stringify(data));
+    return res.end();
+  });
+
   app.use(
     Services.Pipelines,
     new PipelinesService(

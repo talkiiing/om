@@ -4,6 +4,7 @@ import { Application, Services } from '@serverom/common/types';
 import { Feature } from './models/feature.model';
 import { FeaturesService } from './features.class';
 import { featuresHooks } from './features.hooks';
+import { Dataset } from '@serverom/services/datasets';
 
 declare module '@serverom/common/types' {
   interface ServiceTypes {
@@ -12,7 +13,20 @@ declare module '@serverom/common/types' {
 }
 
 export function setupFeaturesService(app: Application) {
-  console.log('registering features');
+  app.get('/download/' + Services.Features + '/:id', async (req, res) => {
+    const data: Feature = await app.services[Services.Features].get(
+      req.params.id
+    );
+
+    res.setHeader(
+      'Content-disposition',
+      'attachment; filename=' + data.name + '.json'
+    );
+
+    res.write(JSON.stringify(data));
+    return res.end();
+  });
+
   app.use(
     Services.Features,
     new FeaturesService(
