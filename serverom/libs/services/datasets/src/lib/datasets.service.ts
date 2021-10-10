@@ -12,6 +12,20 @@ declare module '@serverom/common/types' {
 }
 
 export function setupDatasetsService(app: Application) {
+  app.get('/download/' + Services.Datasets + '/:id', async (req, res) => {
+    const { data, name }: Dataset = await app.services[Services.Datasets].get(
+      req.params.id
+    );
+
+    res.setHeader(
+      'Content-disposition',
+      'attachment; filename=' + name + '.json'
+    );
+
+    res.write(JSON.stringify(data));
+    return res.end();
+  });
+
   app.use(
     Services.Datasets,
     new DatasetsService(
