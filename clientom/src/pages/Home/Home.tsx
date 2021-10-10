@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import Button from '../../ui/Button'
-import { ReactComponent as Logo } from '../../assets/logo.svg'
-import UserModel from '../../models/user.model'
-import {
-  QrcodeIcon,
-} from '@heroicons/react/outline'
-import useSelect from '../../ui/utils/useSelect'
-import Select, { IOptionModel } from '../../ui/Select'
-import useContextMenu from '../../ui/ContextMenu/useContextMenu'
-import { Motion, spring } from 'react-motion'
-import ActionCard from '../../ui/ActionCard/ActionCard'
-import List from '../../ui/ListSet/List'
-
-export const EOptions: IOptionModel[] = [
-  { id: 'one', value: 'One' },
-  { id: 'two', value: 'Two' },
-  { id: 'three', value: 'Three' },
-  { id: 'four', value: 'Four' },
-]
+import usePath from '../../ui/utils/usePath'
 
 const Home = () => {
-
-  // @ts-ignore
+  const { go } = usePath()
   return (
-    <>
-      
-    </>
+    <div className='w-full h-full flex justify-center items-start py-10'>
+      <div className='w-full max-w-3xl flex flex-col items-center justify-center py-3'>
+        <p className='text-white text-[4rem] mt-12'>Приветствуем в Om</p>
+        <p className='text-white mt-6 text-2xl'>
+          Вы можете{' '}
+          <span
+            className='cursor-pointer text-omblue'
+            onClick={() => go('/datasets')}
+          >
+            импортировать
+          </span>{' '}
+          датасет, или{' '}
+          <span
+            className='cursor-pointer text-omblue'
+            onClick={() => go('/pipelines')}
+          >
+            создать новый
+          </span>
+        </p>
+      </div>
+    </div>
   )
 }
 

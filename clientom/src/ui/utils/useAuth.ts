@@ -2,21 +2,33 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { app } from '../../services/feathers/feathers'
 
 const useAuth = () => {
-  const patchStorage = useCallback(() => {
-    app.authentication.setAccessToken(
-      window.localStorage.getItem('accessToken') || '',
-    )
-  }, [])
+  const [authenticated, setAuthenticated] = useState<boolean>(false)
 
   const patchStorageToken = useCallback((token: string) => {
-    app.authentication.setAccessToken(token)
     app
       .authenticate({
         strategy: 'jwt',
         accessToken: token,
       })
-      .then((r) => localStorage.setItem('userEmail', r?.user?.email))
+      .then((r) => {
+        localStorage.setItem('userEmail', r?.user?.email)
+        localStorage.setItem('accessToken', token)
+        setAuthenticated(true)
+      })
   }, [])
+
+  const patchStorage = useCallback(() => {
+    const token = window.localStorage.getItem('accessToken')
+    if (token) {
+      if (app.authentication.authenticated) {
+        setAuthenticated(true)
+      } else {
+        patchStorageToken(token)
+      }
+    } else {
+      setAuthenticated(false)
+    }
+  }, [patchStorageToken])
 
   useEffect(() => {
     window.addEventListener('storage', patchStorage)
@@ -24,9 +36,8 @@ const useAuth = () => {
   }, [patchStorage])
 
   useEffect(() => {
-    if (window.localStorage.getItem('accessToken'))
-      patchStorageToken(window.localStorage.getItem('accessToken') || '')
-  }, [patchStorageToken])
+    patchStorage()
+  }, [patchStorage])
 
   const userGroup = useMemo(() => 'dev', [])
 
@@ -36,18 +47,18 @@ const useAuth = () => {
         new URLSearchParams({
           redirect:
             '?redirect=' +
-            encodeURIComponent('http://localhost:3000/auth-confirm'),
+            encodeURIComponent('http://om.talkiiing.ru/auth-confirm'),
         }),
     )
   }, [])
 
   const logout = useCallback(() => {
-    window.localStorage.removeItem('accessToken')
     app.authentication.logout()
+    window.localStorage.removeItem('accessToken')
   }, [])
 
   return {
-    authenticated: app.authentication.authenticated,
+    authenticated,
     userGroup,
     patchStorageToken,
     login,

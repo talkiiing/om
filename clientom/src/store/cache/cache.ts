@@ -19,14 +19,13 @@ export const cacheSlice = createSlice({
   initialState: {} as CacheStoreModel,
   reducers: {
     save: (state, action: PayloadAction<PayloadInterface>) => {
-      state = {
+      return {
         ...state,
         [action.payload.key]: {
           createdAt: +new Date(),
           data: action.payload.data,
         },
       }
-      localStorage.setItem(StorageKeySettings, JSON.stringify(state))
     },
   },
 })

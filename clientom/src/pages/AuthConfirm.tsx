@@ -10,7 +10,7 @@ const AuthConfirm = () => {
     console.log(history.location.hash)
     if (history.location.hash) {
       patchStorageToken(history.location.hash.split('=')[1])
-      window.close()
+      setTimeout(() => window.close(), 500)
     }
   }, [history.location.hash, patchStorageToken])
 

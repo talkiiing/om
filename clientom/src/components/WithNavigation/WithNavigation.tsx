@@ -26,17 +26,23 @@ const WithNavigation = ({
           <Logo className='w-12 h-10 mx-3 my-2' />
         </div>
         <div className='flex items-center p-3'>
-          <Input model={inputModel} label={'Поиск'} className='mr-4' />
+          <Input
+            model={inputModel}
+            label={'Поиск'}
+            className='mr-4 w-80 flex-grow'
+          />
           {!authenticated ? (
             <GlowButton
               type={'outline'}
-              value={'Войти через Auth0'}
+              value={'Вход'}
+              className='h-12 w-44'
               onClick={() => login()}
             />
           ) : (
             <GlowButton
               type={'outline'}
-              value={'Завершить сессию'}
+              value={'Выйти'}
+              className='h-12 w-44'
               onClick={() => {
                 logout()
                 go(buildRoute([]))

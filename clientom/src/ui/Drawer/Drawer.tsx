@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/outline'
 import useQuery from '../utils/useQuery'
 import usePath from '../utils/usePath'
+import useAuth from '../utils/useAuth'
 
 interface DrawerOptionProps {
   Icon: React.ElementType
@@ -42,19 +43,15 @@ const Drawer = () => {
 
   const [mouseOn, setMouseOn] = useState(false)
 
-  const { query, queryPush, queryPatch } = useQuery()
+  const { authenticated } = useAuth()
 
   const { go } = usePath()
-
-  useEffect(() => {
-    console.log(query.toString())
-  }, [query])
 
   const menuOptions: DrawerOptionProps[] = useMemo(
     () => [
       {
         Icon: HomeIcon,
-        title: 'Центральная панель',
+        title: 'Главная',
         onClick: () => go('/'),
       },
       {
@@ -64,7 +61,7 @@ const Drawer = () => {
       },
       {
         Icon: CodeIcon,
-        title: 'Om-ы',
+        title: 'Om Market',
         onClick: () => go('/oms'),
       },
       {
@@ -73,7 +70,7 @@ const Drawer = () => {
         onClick: () => go('/pipelines'),
       },
     ],
-    [queryPatch, queryPush],
+    [go],
   )
 
   useEffect(() => {
@@ -93,15 +90,17 @@ const Drawer = () => {
       onMouseLeave={() => setMouseOn(false)}
     >
       <div className='flex flex-col items-start'>
-        {menuOptions.map((v, i) => (
-          <DrawerOption
-            Icon={v.Icon}
-            title={v.title}
-            key={v.title}
-            expanded={expanded}
-            onClick={v.onClick}
-          />
-        ))}
+        {menuOptions
+          .slice(0, authenticated ? menuOptions.length : 1)
+          .map((v, i) => (
+            <DrawerOption
+              Icon={v.Icon}
+              title={v.title}
+              key={v.title}
+              expanded={expanded}
+              onClick={v.onClick}
+            />
+          ))}
       </div>
     </div>
   )
