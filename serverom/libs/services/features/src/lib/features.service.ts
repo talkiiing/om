@@ -24,6 +24,8 @@ export function setupFeaturesService(app: Application) {
       'attachment; filename=om-' + data._id + '.json'
     );
 
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+
     res.write(JSON.stringify(data, null, 2));
     return res.end();
   });
