@@ -22,7 +22,7 @@ const Step = (props: StepProps) => {
         } ${
           props.onClick ? 'cursor-pointer' : 'cursor-default'
         } w-8 h-8 flex items-center justify-center bg-omsteps 
-        ring-omblue rounded-full flex-shrink-0 select-none`}
+        ring-omblue rounded-full flex-shrink-0 select-none text-semibold`}
         onClick={() => props.onClick?.()}
       >
         <span>{props.title + 1}</span>

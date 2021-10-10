@@ -2,15 +2,20 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { app } from '../../services/feathers/feathers'
 
 const useAuth = () => {
-  const [accessToken, setAccessToken] = useState<string>('')
-
   const patchStorage = useCallback(() => {
-    setAccessToken(window.localStorage.getItem('accessToken') || '')
+    app.authentication.setAccessToken(
+      window.localStorage.getItem('accessToken') || '',
+    )
   }, [])
 
   const patchStorageToken = useCallback((token: string) => {
     app.authentication.setAccessToken(token)
-    setAccessToken(token)
+    app
+      .authenticate({
+        strategy: 'jwt',
+        accessToken: token,
+      })
+      .then((r) => localStorage.setItem('userEmail', r?.user?.email))
   }, [])
 
   useEffect(() => {
@@ -22,8 +27,6 @@ const useAuth = () => {
     if (window.localStorage.getItem('accessToken'))
       patchStorageToken(window.localStorage.getItem('accessToken') || '')
   }, [patchStorageToken])
-
-  const authenticated = useMemo((): boolean => !!accessToken, [accessToken])
 
   const userGroup = useMemo(() => 'dev', [])
 
@@ -39,13 +42,12 @@ const useAuth = () => {
   }, [])
 
   const logout = useCallback(() => {
-    setAccessToken('')
     window.localStorage.removeItem('accessToken')
     app.authentication.logout()
   }, [])
 
   return {
-    authenticated,
+    authenticated: app.authentication.authenticated,
     userGroup,
     patchStorageToken,
     login,
