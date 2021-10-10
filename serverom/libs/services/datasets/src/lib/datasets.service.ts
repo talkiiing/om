@@ -13,14 +13,15 @@ declare module '@serverom/common/types' {
 
 export function setupDatasetsService(app: Application) {
   app.get('/download/' + Services.Datasets + '/:id', async (req, res) => {
-    const { data, name }: Dataset = await app.services[Services.Datasets].get(
+    // @ts-ignore
+    const { data, _id }: Dataset = await app.services[Services.Datasets].get(
       req.params.id
     );
 
     res.setHeader(
       'Content-disposition',
       // @ts-ignore
-      'attachment; filename=dataset-' + data._id + '.json'
+      'attachment; filename=dataset-' + _id + '.json'
     );
 
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
