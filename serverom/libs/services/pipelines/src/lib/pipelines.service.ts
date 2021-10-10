@@ -22,10 +22,9 @@ export function setupPipelineService(app: Application) {
       // @ts-ignore
       'attachment; filename=pipeline-' + data._id + '.json'
     );
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
 
     res.write(JSON.stringify(data, null, 2));
-
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
 
     return res.end();
   });
