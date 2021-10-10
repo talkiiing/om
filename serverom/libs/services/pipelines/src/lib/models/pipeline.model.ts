@@ -24,4 +24,10 @@ export class Pipeline {
 
   @prop({ ref: () => User, required: true })
   public user!: Ref<User>;
+
+  @prop({ required: true })
+  public name!: string;
+
+  @prop()
+  public description?: string;
 }
