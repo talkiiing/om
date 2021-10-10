@@ -19,7 +19,8 @@ export function setupPipelineService(app: Application) {
 
     res.setHeader(
       'Content-disposition',
-      'attachment; filename=' + data.name + '.json'
+      // @ts-ignore
+      'attachment; filename=pipeline-' + data._id + '.json'
     );
 
     res.write(JSON.stringify(data));

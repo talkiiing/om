@@ -20,7 +20,8 @@ export function setupFeaturesService(app: Application) {
 
     res.setHeader(
       'Content-disposition',
-      'attachment; filename=' + data.name + '.json'
+      // @ts-ignore
+      'attachment; filename=om-' + data._id + '.json'
     );
 
     res.write(JSON.stringify(data));

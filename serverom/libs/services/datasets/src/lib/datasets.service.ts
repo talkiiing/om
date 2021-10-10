@@ -19,7 +19,8 @@ export function setupDatasetsService(app: Application) {
 
     res.setHeader(
       'Content-disposition',
-      'attachment; filename=' + name + '.json'
+      // @ts-ignore
+      'attachment; filename=dataset-' + data._id + '.json'
     );
 
     res.write(JSON.stringify(data));
