@@ -23,7 +23,7 @@ export function setupDatasetsService(app: Application) {
       'attachment; filename=dataset-' + data._id + '.json'
     );
 
-    res.write(JSON.stringify(data));
+    res.write(JSON.stringify(data, null, 2));
     return res.end();
   });
 

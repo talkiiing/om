@@ -23,7 +23,7 @@ export function setupPipelineService(app: Application) {
       'attachment; filename=pipeline-' + data._id + '.json'
     );
 
-    res.write(JSON.stringify(data));
+    res.write(JSON.stringify(data, null, 2));
     return res.end();
   });
 
