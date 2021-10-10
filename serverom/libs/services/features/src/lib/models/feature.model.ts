@@ -1,4 +1,5 @@
-import { prop } from '@typegoose/typegoose';
+import { prop, Ref } from '@typegoose/typegoose';
+import { User } from '@serverom/services/users';
 
 export class MetaItem {
   @prop({ required: true })
@@ -29,4 +30,7 @@ export class Feature {
 
   @prop({ required: true, type: [MetaItem] })
   public meta!: MetaItem[];
+
+  @prop({ ref: () => User, required: true })
+  public user!: Ref<User>;
 }

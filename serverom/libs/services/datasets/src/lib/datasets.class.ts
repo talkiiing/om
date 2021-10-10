@@ -14,7 +14,7 @@ export class DatasetsService extends Service<Dataset> {
     super(options);
     this.app = app;
   }
-
+  // @ts-ignore
   async create(data: CreateDatasetDto, params?: Params): Promise<Dataset> {
     // from url
     if (data.source) {
@@ -24,6 +24,8 @@ export class DatasetsService extends Service<Dataset> {
         {
           name: data.name,
           data: result,
+          // @ts-ignore
+          user: data.user,
         },
         params
       )) as Dataset;
@@ -34,6 +36,8 @@ export class DatasetsService extends Service<Dataset> {
       return (await super.create({
         name: data.name,
         data: data.data,
+        // @ts-ignore
+        user: data.user,
       })) as Dataset;
     }
 
@@ -76,9 +80,12 @@ export class DatasetsService extends Service<Dataset> {
       );
 
       super.create({
+        // @ts-ignore
         pipeline: data.pipeline,
         name: data.name,
         data: newData,
+        // @ts-ignore
+        user: data.user,
       });
     })();
 

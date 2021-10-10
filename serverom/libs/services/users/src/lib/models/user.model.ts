@@ -6,4 +6,7 @@ export class User {
 
   @prop({ required: true })
   public auth0Id!: string;
+
+  @prop()
+  public group?: string;
 }
