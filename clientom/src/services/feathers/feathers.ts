@@ -6,7 +6,14 @@ import auth from '@feathersjs/authentication-client'
 
 const app = feathers()
 const restClient = rest('https://om.s.ix3.space')
-app.configure(restClient.axios(axios))
+
+const axiosInstance = axios.create({
+  headers: {
+    'request-agent': 'axios',
+  },
+})
+
+app.configure(restClient.axios(axiosInstance))
 
 app.configure(feathersClient.authentication())
 app.configure(
