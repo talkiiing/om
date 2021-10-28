@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import './misc/router-animations.css'
 import './misc/additional-animations.css'
@@ -23,6 +23,8 @@ import {
 } from './store/settings/settings'
 import WithNavigation from './components/WithNavigation/WithNavigation'
 import AuthConfirm from './pages/AuthConfirm'
+import { RequestHandlerFn, SyncHandlerFn, useConnectorFn } from 'thrutab'
+import { CacheStoreModel, save } from './store/cache/cache'
 
 const App = () => {
   const history = useHistory()
@@ -32,6 +34,7 @@ const App = () => {
   const settings = useSelector(
     (state: { settings: SettingsModel }) => state.settings,
   )
+  const cache = useSelector((state: { cache: CacheStoreModel }) => state.cache)
   const dispatch = useDispatch()
 
   const reAuth = () => {
@@ -47,6 +50,33 @@ const App = () => {
   useEffect(() => {
     console.log(settings)
   }, [settings])
+
+  const handleRequests: RequestHandlerFn = useCallback(
+    (data, reply, reject) => {
+      console.log('Got to handle', data)
+      if (data && Object(cache).hasOwnProperty(data.requestKey)) {
+        console.log('request is going to be fulfilled')
+        reply(cache[data.requestKey].data)
+      } else {
+        reject()
+      }
+    },
+    [cache],
+  )
+
+  const handleSync: SyncHandlerFn = useCallback(
+    (data) => {
+      dispatch(
+        save({
+          key: data.key,
+          data: data.data,
+        }),
+      )
+    },
+    [dispatch],
+  )
+
+  useConnectorFn(handleRequests, handleSync)
 
   useEffect(() => {
     if (settings.options.colorScheme === 'dark') {
