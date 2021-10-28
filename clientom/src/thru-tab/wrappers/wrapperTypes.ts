@@ -1,4 +1,4 @@
-import { MessageModel, RequestBasedMessage } from '../types'
+import { MessageModel, RequestBasedMessage, SyncBasedMessage } from '../types'
 
 export interface RequestDataProps {
   to?: MessageModel<any>['to']
@@ -6,12 +6,10 @@ export interface RequestDataProps {
   timeout?: number
 }
 
-export class RequestTimeoutError extends Error {
-  name = 'RequestTimeout'
-}
-
 export type RequestHandlerFn = (
   data: RequestBasedMessage,
   reply: (data: RequestBasedMessage['answer']) => void,
   reject: () => void,
 ) => void
+
+export type SyncHandlerFn = (data: SyncBasedMessage) => void

@@ -1,5 +1,4 @@
 import { DefaultMessageTypes, ThruTabTemplatedEventType } from '../types'
-import { associate, remove } from './localstorageManager'
 import {
   isRequestBasedMessage,
   isServiceMessage,
@@ -32,7 +31,7 @@ export async function swTunnel<T = DefaultMessageTypes>(
       console.log('request based')
       const allClients = await this.clients.matchAll()
       for (const client of allClients) {
-        if (!data.to || data.to === client.id) {
+        if (client.id !== data.from && (!data.to || data.to === client.id)) {
           client.postMessage({
             broadcast: data.broadcast,
             from: data.from,
@@ -44,11 +43,13 @@ export async function swTunnel<T = DefaultMessageTypes>(
       console.log('sync based')
       const allClients = await this.clients.matchAll()
       for (const client of allClients) {
-        client.postMessage({
-          broadcast: data.broadcast,
-          from: data.from,
-          to: data.to,
-        })
+        if (client.id !== data.from) {
+          client.postMessage({
+            broadcast: data.broadcast,
+            from: data.from,
+            to: data.to,
+          })
+        }
       }
     }
   }

@@ -1,46 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import usePath from '../../ui/utils/usePath'
-import { dispatchMessage } from '../../thru-tab'
-import { requestData } from '../../thru-tab/wrappers/requestData'
+import React from 'react'
 import useCached from '../../ui/utils/useCached'
 import crypto from 'crypto'
-
-const listener = (event: MessageEvent) => {
-  console.log('catched on Home', event.data)
-}
+import { useSharedData } from 'thrutab'
 
 const Home = () => {
-  /*useEffect(() => {
-    console.log('new value is', localforage.getItem('clicks_on_im'))
-  }, [localforage])*/
-
-  useEffect(() => {
-    navigator.serviceWorker.addEventListener('message', listener)
-    return () =>
-      navigator.serviceWorker.removeEventListener('message', listener)
-  }, [])
+  const { requestData, syncData } = useSharedData()
 
   const { data: cachedData, setData: setCached } = useCached('someKeyToGet')
 
-  const { go } = usePath()
   return (
     <div className='w-full h-full flex justify-center items-start py-10'>
       <div className='w-full max-w-3xl flex flex-col items-center justify-center py-3 text-white text-2xl'>
-        <p className='text-white text-[4rem] mt-12'>Приветствуем в Om</p>
         <p
           className='cursor-pointer text-omblue'
           onClick={async () => {
             if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-              requestData({
-                requestKey: 'someKeyToGet',
-              })
-                .then((r) => console.log('resolved with result', r))
-                .catch((e) => console.log('Cathed error with ', e))
-              console.log('updated')
+              requestData('someKeyToGet', 1000)
+                .then((r) => {
+                  console.log('resolved with result', r)
+                  setCached(r)
+                })
+                .catch((e) => console.log('Error while getting info ', e))
             }
           }}
         >
           отправить запрос
+        </p>
+        <p
+          className='cursor-pointer text-omblue'
+          onClick={async () => {
+            syncData('someKeyToGet', cachedData)
+          }}
+        >
+          сихронизировать
         </p>
         <p
           className='cursor-pointer text-omblue'
@@ -58,6 +50,7 @@ const Home = () => {
         >
           вывести значение
         </p>
+        <p className='text-white'>{cachedData}</p>
       </div>
     </div>
   )

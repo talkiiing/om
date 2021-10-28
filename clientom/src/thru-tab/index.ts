@@ -1,16 +1,14 @@
-import { swTunnel, getTypedSwTunnel } from './modules/swTunnel'
-import {
-  dispatch,
-  register,
-  unregister,
-  cancelSubscriptionOnLeave,
-} from './modules/dispatch'
-
+export * from './types'
+export * from './wrappers/wrapperTypes'
+export { swTunnel, getTypedSwTunnel } from './modules/swTunnel'
 export {
-  swTunnel,
-  getTypedSwTunnel,
-  dispatch as dispatchMessage,
-  register as registerClient,
-  unregister as unregisterClient,
+  registerClient,
+  unregisterClient,
+  dispatchMessage,
+  addClientToSubscribers,
   cancelSubscriptionOnLeave,
-}
+  manageSubscription,
+} from './modules/dispatch'
+export { requestData } from './wrappers/requestData'
+export { syncData } from './wrappers/syncData'
+export { registerHandler, unregisterHandler } from './wrappers/registerHandler'

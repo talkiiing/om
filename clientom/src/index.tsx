@@ -6,10 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from './store/store'
-import * as localforage from 'localforage'
 import { Workbox } from 'workbox-window'
-import { cancelSubscriptionOnLeave, registerClient } from './thru-tab'
-import { RegisterMessage } from './thru-tab/types'
+import { manageSubscription } from 'thrutab'
 import crypto from 'crypto'
 
 ReactDOM.render(
@@ -30,25 +28,18 @@ ReactDOM.render(
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('/service-worker.js')
 
-  const localSign = crypto.randomBytes(10).toString('hex')
-
   wb.addEventListener('waiting', () => {
     wb.messageSkipWaiting()
   })
 
+  const localSign = crypto.randomBytes(10).toString('hex')
+
   wb.register()
     .then((reg) => {
-      // eslint-disable-next-line
-      registerClient({
-        broadcast: { sign: localSign, type: 'register' },
-      })
-      console.info('Successful service worker registration', reg)
-      cancelSubscriptionOnLeave()
+      manageSubscription(localSign)
     })
-    .catch((err) => console.error('Service worker registration failed', err))
+    .catch((err) => console.error('Service Worker registration failed', err))
 }
-
-console.log('Registering SW')
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

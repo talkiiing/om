@@ -1,11 +1,6 @@
-import { RequestHandlerFn } from './wrapperTypes'
-import {
-  DataPromiseBusState,
-  MessageModel,
-  RequestBasedMessage,
-  TunnelEvent,
-} from '../types'
-import { isRequestBasedMessage } from '../modules/typeCheck'
+import { RequestHandlerFn, SyncHandlerFn } from './wrapperTypes'
+import { MessageModel, RequestBasedMessage, TunnelEvent } from '../types'
+import { isRequestBasedMessage, isSyncBasedMessage } from '../modules/typeCheck'
 import { replyOnDataRequest, resolveDataRequest } from './requestData'
 
 const getReplyFn =
@@ -17,16 +12,19 @@ const getReplyFn =
   (data: any) =>
     replyOnDataRequest(to, requestId, requestKey, data)
 
-export const registerHandler = (fn: RequestHandlerFn) => {
+export const registerHandler = (
+  requestFn?: RequestHandlerFn,
+  syncFn?: SyncHandlerFn,
+) => {
   const builtFn = (event: MessageEvent<TunnelEvent<RequestBasedMessage>>) => {
     console.log('builtFn called')
     if (isRequestBasedMessage(event.data.broadcast)) {
       console.log('builtFn called for request')
-      if (!event.data.broadcast.answer) {
-        fn(
+      if (!event.data.broadcast.answer && requestFn) {
+        requestFn(
           event.data.broadcast,
           getReplyFn(
-            event.data.to,
+            event.data.from,
             event.data.broadcast.requestId,
             event.data.broadcast.requestKey,
           ),
@@ -37,6 +35,11 @@ export const registerHandler = (fn: RequestHandlerFn) => {
           event.data.broadcast.requestId,
           event.data.broadcast.answer,
         )
+      }
+    } else if (isSyncBasedMessage(event.data.broadcast)) {
+      console.log('We will try to sync')
+      if (syncFn) {
+        syncFn(event.data.broadcast)
       }
     }
   }

@@ -1,5 +1,5 @@
-import { RequestDataProps, RequestTimeoutError } from './wrapperTypes'
-import { dispatchMessage } from '../index'
+import { RequestDataProps } from './wrapperTypes'
+import { dispatchMessage } from '../modules/dispatch'
 import {
   DataPromiseBusState,
   MessageModel,
@@ -7,6 +7,7 @@ import {
   RequestMessageStatus,
 } from '../types'
 import crypto from 'crypto'
+import { RequestTimeoutError } from '../errors'
 
 const state: DataPromiseBusState[] = []
 
@@ -25,7 +26,7 @@ export const requestData = <ExpectedDataType = any>({
     ;[resolve, reject] = [_resolve, _reject]
     timeoutId = setTimeout(
       () => reject(new RequestTimeoutError()),
-      timeout || 10000,
+      timeout || 3000,
     )
   })
 

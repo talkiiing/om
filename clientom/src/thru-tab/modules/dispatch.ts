@@ -1,38 +1,47 @@
 import { MessageModel, RegisterMessage } from '../types'
-import { unregisterClient } from '../index'
+import { NoWorkerAvailableError } from '../errors'
 
-const noWorkerError = () => new Error('No Service Worker controller available.')
-
-export const dispatch = <T = any>(data: MessageModel<T>) => {
+export const dispatchMessage = <T = any>(data: MessageModel<T>) => {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage(data)
   } else {
-    throw noWorkerError()
+    throw new NoWorkerAvailableError()
   }
 }
 
-export const register = (sign: RegisterMessage) => {
+export const registerClient = (sign: RegisterMessage) => {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage({
       broadcast: sign.broadcast,
     })
   } else {
-    throw noWorkerError()
+    throw new NoWorkerAvailableError()
   }
 }
 
-export const unregister = () => {
+export const unregisterClient = () => {
   if (navigator.serviceWorker && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage({
       broadcast: { type: 'unregister' },
     })
   } else {
-    throw noWorkerError()
+    throw new NoWorkerAvailableError()
   }
+}
+
+export const addClientToSubscribers = (sign: string) => {
+  registerClient({
+    broadcast: { sign: sign, type: 'register' },
+  })
 }
 
 export const cancelSubscriptionOnLeave = () => {
   window.addEventListener('beforeunload', (event) => {
     unregisterClient()
   })
+}
+
+export const manageSubscription = (sign: string) => {
+  addClientToSubscribers(sign)
+  cancelSubscriptionOnLeave()
 }

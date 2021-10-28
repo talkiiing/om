@@ -23,13 +23,8 @@ import {
 } from './store/settings/settings'
 import WithNavigation from './components/WithNavigation/WithNavigation'
 import AuthConfirm from './pages/AuthConfirm'
-import {
-  registerHandler,
-  unregisterHandler,
-} from './thru-tab/wrappers/registerHandler'
-import { RequestHandlerFn } from './thru-tab/wrappers/wrapperTypes'
-import { CacheStoreModel } from './store/cache/cache'
-import { unregisterClient } from './thru-tab'
+import { RequestHandlerFn, SyncHandlerFn, useConnectorFn } from 'thrutab'
+import { CacheStoreModel, save } from './store/cache/cache'
 
 const App = () => {
   const history = useHistory()
@@ -69,10 +64,19 @@ const App = () => {
     [cache],
   )
 
-  useEffect(() => {
-    const fnRef = registerHandler(handleRequests)
-    return () => unregisterHandler(fnRef)
-  }, [handleRequests])
+  const handleSync: SyncHandlerFn = useCallback(
+    (data) => {
+      dispatch(
+        save({
+          key: data.key,
+          data: data.data,
+        }),
+      )
+    },
+    [dispatch],
+  )
+
+  useConnectorFn(handleRequests, handleSync)
 
   useEffect(() => {
     if (settings.options.colorScheme === 'dark') {
