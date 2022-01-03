@@ -23,7 +23,8 @@ import {
 } from './store/settings/settings'
 import WithNavigation from './components/WithNavigation/WithNavigation'
 import AuthConfirm from './pages/AuthConfirm'
-import { RequestHandlerFn, SyncHandlerFn, useConnectorFn } from 'thrutab'
+import { AskHandlerFn, SyncHandlerFn } from './tash/core/types'
+import { useConnectorFn } from './tash/react'
 import { CacheStoreModel, save } from './store/cache/cache'
 
 const App = () => {
@@ -51,12 +52,12 @@ const App = () => {
     console.log(settings)
   }, [settings])
 
-  const handleRequests: RequestHandlerFn = useCallback(
+  const handleRequests: AskHandlerFn = useCallback(
     (data, reply, reject) => {
       console.log('Got to handle', data)
-      if (data && Object(cache).hasOwnProperty(data.requestKey)) {
+      if (data && Object(cache).hasOwnProperty(data.payload.key)) {
         console.log('request is going to be fulfilled')
-        reply(cache[data.requestKey].data)
+        reply(cache[data.payload.key].data)
       } else {
         reject()
       }

@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store/store'
 import { Workbox } from 'workbox-window'
-import { manageSubscription } from 'thrutab'
 import crypto from 'crypto'
+import { automateSubscriptionLifecycle } from './tash/core/dispatch'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,7 +36,7 @@ if ('serviceWorker' in navigator) {
 
   wb.register()
     .then((reg) => {
-      manageSubscription(localSign)
+      automateSubscriptionLifecycle(localSign)
     })
     .catch((err) => console.error('Service Worker registration failed', err))
 }

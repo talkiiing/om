@@ -1,7 +1,7 @@
 import React from 'react'
 import useCached from '../../ui/utils/useCached'
 import crypto from 'crypto'
-import { useSharedData } from 'thrutab'
+import { useSharedData } from '../../tash/react'
 
 const Home = () => {
   const { requestData, syncData } = useSharedData()
@@ -15,7 +15,7 @@ const Home = () => {
           className='cursor-pointer text-omblue'
           onClick={async () => {
             if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-              requestData('someKeyToGet', 1000)
+              requestData('someKeyToGet', 5000)
                 .then((r) => {
                   console.log('resolved with result', r)
                   setCached(r)
